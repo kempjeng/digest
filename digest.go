@@ -95,14 +95,14 @@ func parseChallenge(input string) (*challenge, error) {
 		return nil, ErrBadChallenge
 	}
 	s = strings.Trim(s[7:], ws)
-	sl := strings.Split(s, ", ")
+	sl := strings.Split(s, ",")
 	c := &challenge{
 		Algorithm: "MD5",
 	}
 	var r []string
 	for i := range sl {
 		r = strings.SplitN(sl[i], "=", 2)
-		switch r[0] {
+		switch strings.Trim(r[0],ws) {
 		case "realm":
 			c.Realm = strings.Trim(r[1], qs)
 		case "domain":
